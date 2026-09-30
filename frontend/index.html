@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Patient Journey Bottleneck Analyzer (PNH1) - Enterprise MedAI Healthcare Operations Intelligence System">
-  <title>PATIENT JOURNEY BOTTLENECK ANALYZER – PNH1 | Healthcare Operations Intelligence</title>
+  <meta name="description" content="Med-Pulse 360: Multi-Component Healthcare Analytics System for Patient Journey Reconstruction, Systemic Bottleneck Detection, and Adversarial Resilience.">
+  <title>Med-Pulse 360 | Patient Journey Bottleneck Analyzer</title>
 
   <!-- Typography: Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -27,29 +27,26 @@
         <i class="fas fa-heart-pulse"></i>
       </div>
       <div class="brand-title">
-        <h1>PATIENT JOURNEY BOTTLENECK ANALYZER</h1>
+        <h1>MED-PULSE 360</h1>
         <div class="subtitle">
-          <span>Healthcare Operations Intelligence | MedAI</span>
+          <span>Patient Journey Bottleneck Analyzer</span>
           <span style="opacity: 0.4;">|</span>
-          <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-cyan);">Statement ID: PNH1</span>
+          <span style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-cyan);">PNH1 Enterprise</span>
         </div>
       </div>
     </div>
 
     <div class="header-actions">
-      <span class="sec-pill hipaa">
-        <i class="fas fa-shield-alt"></i> HIPAA SECURITY: ACTIVE
+      <span class="badge-tag pulse-live">
+        Live Ingestion Stream
       </span>
-      <span class="sec-pill audit">
-        <i class="fas fa-shield-check"></i> SHA-256 AUDIT LEDGER: VERIFIED
-      </span>
-      <span class="sec-pill pnh">
-        <i class="fas fa-lock"></i> ENCRYPTED (AES-256)
+      <span class="badge-tag hipaa-guard">
+        <i class="fas fa-shield-alt"></i> HIPAA § 164.312 Active
       </span>
       <button id="btn-refresh-all" class="btn btn-secondary">
-        <i class="fas fa-sync-alt"></i> Refresh Data
+        <i class="fas fa-sync-alt"></i> Refresh Telemetry
       </button>
-      <button id="btn-verify-audit" class="btn btn-primary" title="Cryptographically verify audit ledger hash proof">
+      <button id="btn-verify-audit" class="btn btn-primary">
         <i class="fas fa-fingerprint"></i> Verify Hash Proof
       </button>
       <button id="btn-reset-db" class="btn btn-crimson" title="Reset and re-seed 120 synthetic patients">
@@ -61,66 +58,44 @@
   <!-- Main Application Body -->
   <main class="app-body">
 
-    <!-- TOP 5 KPI CARDS -->
+    <!-- KPI Ribbon -->
     <section class="kpi-grid">
-      <!-- 1. Total Patients -->
       <div class="glass-panel kpi-card cyan">
         <div class="kpi-label">
-          <span>Total Patients</span>
-          <i class="fas fa-hospital-user"></i>
+          <span>Active Patient Traces</span>
+          <i class="fas fa-users-line"></i>
         </div>
-        <div id="kpi-total-patients" class="kpi-value">1,248</div>
-        <div class="kpi-footer positive">
-          <i class="fas fa-circle-check" style="color: var(--accent-emerald);"></i> 100% Ingested & Normalized
-        </div>
+        <div id="kpi-active-patients" class="kpi-value">--</div>
+        <div id="kpi-cohort-total" class="kpi-footer">-- Total Traces</div>
       </div>
 
-      <!-- 2. Average Patient Waiting Time -->
-      <div class="glass-panel kpi-card amber">
-        <div class="kpi-label">
-          <span>Average Patient Waiting Time</span>
-          <i class="fas fa-hourglass-half"></i>
-        </div>
-        <div id="kpi-avg-waiting" class="kpi-value">14.6 hrs</div>
-        <div class="kpi-footer alert">
-          <i class="fas fa-arrow-trend-up"></i> +8.4h above target SLA
-        </div>
-      </div>
-
-      <!-- 3. Patients With Delays -->
-      <div class="glass-panel kpi-card crimson">
-        <div class="kpi-label">
-          <span>Patients With Delays</span>
-          <i class="fas fa-user-clock"></i>
-        </div>
-        <div id="kpi-patients-delayed" class="kpi-value">342</div>
-        <div class="kpi-footer alert">
-          <i class="fas fa-triangle-exclamation"></i> 27.4% Stalled in System
-        </div>
-      </div>
-
-      <!-- 4. Critical Bottleneck -->
-      <div class="glass-panel kpi-card purple">
-        <div class="kpi-label">
-          <span>Critical Bottleneck</span>
-          <i class="fas fa-fire"></i>
-        </div>
-        <div id="kpi-critical-choke" class="kpi-value" style="font-size: 1.3rem; line-height: 1.3;">Insurance Auth</div>
-        <div class="kpi-footer alert">
-          <i class="fas fa-bolt"></i> BCI: 3.98 (Critical Severity)
-        </div>
-      </div>
-
-      <!-- 5. Mean Length of Stay -->
       <div class="glass-panel kpi-card emerald">
         <div class="kpi-label">
           <span>Mean Length of Stay</span>
-          <i class="fas fa-bed-pulse"></i>
+          <i class="fas fa-clock"></i>
         </div>
-        <div id="kpi-mean-los" class="kpi-value">64.0 hrs</div>
+        <div id="kpi-avg-stay" class="kpi-value">--</div>
         <div class="kpi-footer positive">
-          <i class="fas fa-calendar-check"></i> 2.67 Hospital Days Avg
+          <i class="fas fa-chart-line"></i> -3.4h post-intervention
         </div>
+      </div>
+
+      <div class="glass-panel kpi-card crimson">
+        <div class="kpi-label">
+          <span>Critical Choke Point</span>
+          <i class="fas fa-triangle-exclamation"></i>
+        </div>
+        <div id="kpi-top-choke" class="kpi-value" style="font-size: 1.4rem;">--</div>
+        <div id="kpi-choke-bci" class="kpi-footer alert">BCI: -- (Critical)</div>
+      </div>
+
+      <div class="glass-panel kpi-card amber">
+        <div class="kpi-label">
+          <span>Adversarial Resilience</span>
+          <i class="fas fa-shield-halved"></i>
+        </div>
+        <div id="kpi-healed-count" class="kpi-value">--</div>
+        <div id="kpi-quarantine-count" class="kpi-footer">100% Healed or Quarantined</div>
       </div>
     </section>
 
@@ -146,192 +121,42 @@
       </button>
     </nav>
 
-    <!-- ====================================================================
-         TAB 1: EXECUTIVE COMMAND CENTER (Complete PNH1 Production View)
-         ==================================================================== -->
+    <!-- Tab 1: Executive Command Center -->
     <section id="tab-dashboard" class="tab-content active">
-
-      <!-- PATIENT JOURNEY TIMELINE (8-Stage Flow with Glowing Red Choke Point) -->
-      <section class="journey-pipeline-container">
-        <div class="pipeline-header">
-          <div class="pipeline-title">
-            <i class="fas fa-route" style="color: var(--accent-cyan);"></i>
-            <span>End-to-End Reconstructed Patient Journey Flow</span>
-          </div>
-          <div class="pipeline-badge-choke">
-            <i class="fas fa-circle-exclamation"></i>
-            <span>INSURANCE AUTHORIZATION – CRITICAL BOTTLENECK</span>
-          </div>
-        </div>
-
-        <div class="pipeline-flow">
-          <!-- Stage 1 -->
-          <div class="pipeline-step">
-            <div class="step-number">Stage 01</div>
-            <div class="step-label">Appointment</div>
-            <div class="step-time">15 mins</div>
-            <div class="step-subtext">Online / Walk-in</div>
-          </div>
-
-          <!-- Stage 2 -->
-          <div class="pipeline-step">
-            <div class="step-number">Stage 02</div>
-            <div class="step-label">Doctor Consultation</div>
-            <div class="step-time">25 mins</div>
-            <div class="step-subtext">Triage & Intake</div>
-          </div>
-
-          <!-- Stage 3 -->
-          <div class="pipeline-step">
-            <div class="step-number">Stage 03</div>
-            <div class="step-label">Diagnostic Test</div>
-            <div class="step-time">1.2 hrs</div>
-            <div class="step-subtext">CT / MRI Order</div>
-          </div>
-
-          <!-- Stage 4 -->
-          <div class="pipeline-step">
-            <div class="step-number">Stage 04</div>
-            <div class="step-label">Lab Result</div>
-            <div class="step-time">2.8 hrs</div>
-            <div class="step-subtext">PACS & Pathology</div>
-          </div>
-
-          <!-- Stage 5 -->
-          <div class="pipeline-step">
-            <div class="step-number">Stage 05</div>
-            <div class="step-label">Specialist Referral</div>
-            <div class="step-time">4.1 hrs</div>
-            <div class="step-subtext">Cardio / Ortho</div>
-          </div>
-
-          <!-- Stage 6: CRITICAL BOTTLENECK -->
-          <div class="pipeline-step bottleneck">
-            <div class="step-number" style="color: #FF5252;">Stage 06 [CHOKE POINT]</div>
-            <div class="step-label">Insurance Authorization</div>
-            <div class="step-time alert">38.5 hrs</div>
-            <div class="step-subtext" style="color: #FF8A80; font-weight: 700;">Target SLA: 4.0h (+862%)</div>
-          </div>
-
-          <!-- Stage 7 -->
-          <div class="pipeline-step">
-            <div class="step-number">Stage 07</div>
-            <div class="step-label">Treatment</div>
-            <div class="step-time">22.0 hrs</div>
-            <div class="step-subtext">Inpatient / Bed Stay</div>
-          </div>
-
-          <!-- Stage 8 -->
-          <div class="pipeline-step">
-            <div class="step-number">Stage 08</div>
-            <div class="step-label">Discharge</div>
-            <div class="step-time">3.5 hrs</div>
-            <div class="step-subtext">Pharmacy & Transit</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ROW 1: TOP SYSTEMIC BOTTLENECKS TABLE & REAL-TIME OPERATIONAL ALERTS -->
-      <div class="grid-2col-65-35">
-        <!-- Bottleneck Analysis Table -->
+      <div class="dashboard-grid-2col">
+        <!-- Top Bottlenecks Ranking -->
         <div class="glass-panel">
           <div class="card-header">
             <div>
               <div class="card-title">
-                <i class="fas fa-list-check" style="color: #FF5252;"></i>
-                Top Systemic Bottlenecks
+                <i class="fas fa-fire-flame-curved" style="color: var(--accent-crimson);"></i>
+                Top Systemic Bottlenecks (Ranked by BCI)
               </div>
-              <div class="card-subtitle">Ranked by Bottleneck Criticality Index (BCI), 90th percentile latency, and patient delay volume</div>
+              <div class="card-subtitle">Calculated via 90th percentile latency, variance, and queued volume</div>
             </div>
           </div>
-          <div class="card-body" style="padding: 0;">
-            <div class="data-table-wrap">
-              <table class="ent-table">
+          <div class="card-body">
+            <div class="data-table-container">
+              <table class="med-table">
                 <thead>
                   <tr>
-                    <th>Transition / Choke Point</th>
+                    <th>Transition & Choke Driver</th>
                     <th>Severity</th>
                     <th>BCI Score</th>
-                    <th>Median Duration</th>
-                    <th>P90 Duration</th>
+                    <th>Median (P90)</th>
                     <th>Target SLA</th>
-                    <th>Patients Impacted</th>
-                    <th>Estimated Cost</th>
+                    <th>Annual Cost</th>
                   </tr>
                 </thead>
-                <tbody id="top-bottlenecks-tbody">
-                  <tr>
-                    <td>
-                      <strong>PRIOR AUTH SUBMITTED → PRIOR AUTH DECISION</strong>
-                      <div style="font-size: 0.72rem; color: var(--text-muted);">Payer authorization backlog & manual peer review</div>
-                    </td>
-                    <td><span class="badge-sev CRITICAL">CRITICAL</span></td>
-                    <td><strong style="color: #FF5252; font-family: var(--font-mono);">3.98</strong></td>
-                    <td><span style="font-family: var(--font-mono);">38.5 hrs</span></td>
-                    <td><span style="font-family: var(--font-mono);">46.0 hrs</span></td>
-                    <td><span style="font-family: var(--font-mono);">4.0 hrs</span></td>
-                    <td><strong>184</strong></td>
-                    <td style="color: #FF5252; font-family: var(--font-mono); font-weight: 700;">$532,000</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <strong>BED REQUESTED → BED ASSIGNED</strong>
-                      <div style="font-size: 0.72rem; color: var(--text-muted);">Housekeeping disinfection & nurse handover backlog</div>
-                    </td>
-                    <td><span class="badge-sev MODERATE">MODERATE</span></td>
-                    <td><strong style="color: #FFD54F; font-family: var(--font-mono);">2.74</strong></td>
-                    <td><span style="font-family: var(--font-mono);">5.2 hrs</span></td>
-                    <td><span style="font-family: var(--font-mono);">8.5 hrs</span></td>
-                    <td><span style="font-family: var(--font-mono);">2.0 hrs</span></td>
-                    <td><strong>96</strong></td>
-                    <td style="color: #FFD54F; font-family: var(--font-mono); font-weight: 700;">$168,000</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <strong>IMAGING ORDER → IMAGING COMPLETE</strong>
-                      <div style="font-size: 0.72rem; color: var(--text-muted);">Evening CT/MRI technician shortage & PACS batch queue</div>
-                    </td>
-                    <td><span class="badge-sev MODERATE">MODERATE</span></td>
-                    <td><strong style="color: #FFD54F; font-family: var(--font-mono);">2.45</strong></td>
-                    <td><span style="font-family: var(--font-mono);">4.8 hrs</span></td>
-                    <td><span style="font-family: var(--font-mono);">7.2 hrs</span></td>
-                    <td><span style="font-family: var(--font-mono);">1.5 hrs</span></td>
-                    <td><strong>78</strong></td>
-                    <td style="color: #FFD54F; font-family: var(--font-mono); font-weight: 700;">$142,500</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <strong>DISCHARGE ORDER → DISCHARGE COMPLETED</strong>
-                      <div style="font-size: 0.72rem; color: var(--text-muted);">Take-home medication dispensing & transport coordination</div>
-                    </td>
-                    <td><span class="badge-sev MODERATE">MODERATE</span></td>
-                    <td><strong style="color: #FFD54F; font-family: var(--font-mono);">2.10</strong></td>
-                    <td><span style="font-family: var(--font-mono);">3.2 hrs</span></td>
-                    <td><span style="font-family: var(--font-mono);">5.1 hrs</span></td>
-                    <td><span style="font-family: var(--font-mono);">1.0 hrs</span></td>
-                    <td><strong>64</strong></td>
-                    <td style="color: #FFD54F; font-family: var(--font-mono); font-weight: 700;">$98,400</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <strong>BED ASSIGNED → DISCHARGE ORDER</strong>
-                      <div style="font-size: 0.72rem; color: var(--text-muted);">Inpatient clinical care trajectory and rounding</div>
-                    </td>
-                    <td><span class="badge-sev NORMAL">NORMAL</span></td>
-                    <td><strong style="color: var(--accent-emerald); font-family: var(--font-mono);">1.22</strong></td>
-                    <td><span style="font-family: var(--font-mono);">32.5 hrs</span></td>
-                    <td><span style="font-family: var(--font-mono);">45.1 hrs</span></td>
-                    <td><span style="font-family: var(--font-mono);">24.0 hrs</span></td>
-                    <td><strong>120</strong></td>
-                    <td style="color: var(--accent-emerald); font-family: var(--font-mono); font-weight: 700;">$65,200</td>
-                  </tr>
+                <tbody id="bottlenecks-table-body">
+                  <tr><td colspan="6" style="text-align: center; color: var(--text-muted);">Loading analytics...</td></tr>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
 
-        <!-- Real-Time Operational Alerts Panel -->
+        <!-- Real-Time Alerts Feed -->
         <div class="glass-panel">
           <div class="card-header">
             <div>
@@ -343,423 +168,15 @@
             </div>
           </div>
           <div class="card-body">
-            <div class="alert-feed-list">
-              <div class="alert-item critical">
-                <div class="alert-icon"><i class="fas fa-triangle-exclamation"></i></div>
-                <div class="alert-content">
-                  <div class="alert-title">Insurance authorization delay detected</div>
-                  <div class="alert-desc">Payer pre-authorization backlog exceeding 36h threshold. 184 patients stalled awaiting commercial peer review.</div>
-                  <div class="alert-meta"><span><i class="fas fa-hospital"></i> Payer Gateway EDI-278</span> <span>Impact: +18.4 hrs stay</span></div>
-                </div>
-              </div>
-
-              <div class="alert-item moderate">
-                <div class="alert-icon"><i class="fas fa-bed"></i></div>
-                <div class="alert-content">
-                  <div class="alert-title">Bed assignment exceeds SLA</div>
-                  <div class="alert-desc">Inpatient bed turnaround latency currently averaging 5.2 hrs (Target SLA: 2.0 hrs) due to housekeeping shift handover.</div>
-                  <div class="alert-meta"><span><i class="fas fa-clock"></i> Median 5.2h / SLA 2.0h</span> <span>96 patients queued</span></div>
-                </div>
-              </div>
-
-              <div class="alert-item moderate">
-                <div class="alert-icon"><i class="fas fa-x-ray"></i></div>
-                <div class="alert-content">
-                  <div class="alert-title">Imaging completion exceeds SLA</div>
-                  <div class="alert-desc">Radiology CT scan batch queues holding 78 orders across evening shift (18:00–22:00) with technician staffing deficit.</div>
-                  <div class="alert-meta"><span><i class="fas fa-microscope"></i> PACS Integration</span> <span>78 patients impacted</span></div>
-                </div>
-              </div>
-
-              <div class="alert-item moderate">
-                <div class="alert-icon"><i class="fas fa-truck-medical"></i></div>
-                <div class="alert-content">
-                  <div class="alert-title">Discharge dependency detected</div>
-                  <div class="alert-desc">Outpatient bedside prescription reconciliation and non-emergent medical transport delays holding 64 cleared beds.</div>
-                  <div class="alert-meta"><span><i class="fas fa-pills"></i> Pharmacy & Transit</span> <span>64 beds blocked</span></div>
-                </div>
-              </div>
-
-              <div class="alert-item success">
-                <div class="alert-icon"><i class="fas fa-shield-halved"></i></div>
-                <div class="alert-content">
-                  <div class="alert-title">Adversarial Resilience Active</div>
-                  <div class="alert-desc">34 out-of-order & duplicate clinical events auto-repaired via Causal DAG heuristics; 5 malformed feeds quarantined.</div>
-                  <div class="alert-meta"><span><i class="fas fa-shield-check"></i> Self-Healing Engine</span> <span>100% Data Integrity</span></div>
-                </div>
-              </div>
+            <div id="alert-feed-container" class="alert-feed-list">
+              <!-- Dynamically populated -->
             </div>
           </div>
         </div>
       </div>
-
-      <!-- ROW 2: ROOT CAUSE ANALYSIS & ADVERSARIAL RESILIENCE -->
-      <div class="dashboard-grid-equal">
-        <!-- Root Cause Analysis Panel -->
-        <div class="glass-panel">
-          <div class="card-header">
-            <div>
-              <div class="card-title">
-                <i class="fas fa-chart-simple" style="color: var(--accent-purple);"></i>
-                Root Cause Analysis
-              </div>
-              <div class="card-subtitle">Correlation factors & impact percentages of systemic healthcare delay drivers</div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="root-cause-bar-list">
-              <!-- Factor 1 -->
-              <div class="rc-bar-item">
-                <div class="rc-bar-header">
-                  <span class="rc-bar-title"><i class="fas fa-file-invoice-dollar" style="color: #FF5252;"></i> Payer authorization backlog</span>
-                  <span class="rc-bar-stat"><strong style="color: #FF5252;">82% Impact</strong> <span style="color: var(--text-muted);">(r = 0.88, p &lt; 0.001)</span></span>
-                </div>
-                <div class="rc-bar-track">
-                  <div class="rc-bar-fill" style="width: 82%; background: linear-gradient(90deg, #FF1744, #FF5252);"></div>
-                </div>
-              </div>
-
-              <!-- Factor 2 -->
-              <div class="rc-bar-item">
-                <div class="rc-bar-header">
-                  <span class="rc-bar-title"><i class="fas fa-vials" style="color: var(--accent-amber);"></i> High diagnostic volume</span>
-                  <span class="rc-bar-stat"><strong style="color: var(--accent-amber);">68% Impact</strong> <span style="color: var(--text-muted);">(r = 0.74, p &lt; 0.01)</span></span>
-                </div>
-                <div class="rc-bar-track">
-                  <div class="rc-bar-fill" style="width: 68%; background: linear-gradient(90deg, #FF9100, #FFB300);"></div>
-                </div>
-              </div>
-
-              <!-- Factor 3 -->
-              <div class="rc-bar-item">
-                <div class="rc-bar-header">
-                  <span class="rc-bar-title"><i class="fas fa-wrench" style="color: var(--accent-amber);"></i> Equipment downtime</span>
-                  <span class="rc-bar-stat"><strong style="color: var(--accent-amber);">54% Impact</strong> <span style="color: var(--text-muted);">(r = 0.69, p &lt; 0.01)</span></span>
-                </div>
-                <div class="rc-bar-track">
-                  <div class="rc-bar-fill" style="width: 54%; background: linear-gradient(90deg, #FFB300, #FFD54F);"></div>
-                </div>
-              </div>
-
-              <!-- Factor 4 -->
-              <div class="rc-bar-item">
-                <div class="rc-bar-header">
-                  <span class="rc-bar-title"><i class="fas fa-user-doctor" style="color: var(--accent-cyan);"></i> Staff shortage</span>
-                  <span class="rc-bar-stat"><strong style="color: var(--accent-cyan);">42% Impact</strong> <span style="color: var(--text-muted);">(r = 0.58, p = 0.02)</span></span>
-                </div>
-                <div class="rc-bar-track">
-                  <div class="rc-bar-fill" style="width: 42%; background: linear-gradient(90deg, #00B0FF, #00E5FF);"></div>
-                </div>
-              </div>
-
-              <!-- Factor 5 -->
-              <div class="rc-bar-item">
-                <div class="rc-bar-header">
-                  <span class="rc-bar-title"><i class="fas fa-bed-pulse" style="color: var(--accent-cyan);"></i> Bed availability</span>
-                  <span class="rc-bar-stat"><strong style="color: var(--accent-cyan);">38% Impact</strong> <span style="color: var(--text-muted);">(r = 0.51, p = 0.04)</span></span>
-                </div>
-                <div class="rc-bar-track">
-                  <div class="rc-bar-fill" style="width: 38%; background: linear-gradient(90deg, #0091EA, #40C4FF);"></div>
-                </div>
-              </div>
-
-              <!-- Factor 6 -->
-              <div class="rc-bar-item">
-                <div class="rc-bar-header">
-                  <span class="rc-bar-title"><i class="fas fa-file-signature" style="color: var(--accent-emerald);"></i> Pending report validation</span>
-                  <span class="rc-bar-stat"><strong style="color: var(--accent-emerald);">31% Impact</strong> <span style="color: var(--text-muted);">(r = 0.44, p = 0.05)</span></span>
-                </div>
-                <div class="rc-bar-track">
-                  <div class="rc-bar-fill" style="width: 31%; background: linear-gradient(90deg, #00C853, #00E676);"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Adversarial Resilience Panel -->
-        <div class="glass-panel">
-          <div class="card-header">
-            <div>
-              <div class="card-title">
-                <i class="fas fa-shield-virus" style="color: var(--accent-emerald);"></i>
-                Adversarial Resilience: ACTIVE
-              </div>
-              <div class="card-subtitle">Automated causal DAG reordering, payload isolation, and clinical imputation</div>
-            </div>
-            <span class="sec-pill audit"><i class="fas fa-check-double"></i> Self-Healing Engine</span>
-          </div>
-          <div class="card-body">
-            <div class="resilience-banner">
-              <div class="resilience-banner-title">
-                <i class="fas fa-circle-check"></i>
-                <span>Causal DAG Temporal Ordering &amp; Quarantine Active</span>
-              </div>
-              <span class="res-status-pill repaired"><i class="fas fa-bolt"></i> ZERO DATA LOSS</span>
-            </div>
-
-            <div class="res-metrics-grid">
-              <div class="res-metric-box">
-                <div class="res-metric-num" style="color: #FF5252;">5</div>
-                <div class="res-metric-label">Corrupted Records Detected</div>
-              </div>
-              <div class="res-metric-box">
-                <div class="res-metric-num" style="color: var(--accent-amber);">18</div>
-                <div class="res-metric-label">Duplicate Events Removed</div>
-              </div>
-              <div class="res-metric-box">
-                <div class="res-metric-num" style="color: var(--accent-cyan);">12</div>
-                <div class="res-metric-label">Missing Clinical Notes Handled</div>
-              </div>
-              <div class="res-metric-box">
-                <div class="res-metric-num" style="color: var(--accent-emerald);">34</div>
-                <div class="res-metric-label">Out-of-Order Timestamps Repaired</div>
-              </div>
-              <div class="res-metric-box">
-                <div class="res-metric-num" style="color: #FF5252;">5</div>
-                <div class="res-metric-label">Malformed Feeds Quarantined</div>
-              </div>
-            </div>
-
-            <div style="background: rgba(13, 20, 36, 0.7); border: 1px solid var(--surface-glass-border); border-radius: var(--radius-sm); padding: 1rem;">
-              <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 0.75rem; letter-spacing: 0.5px;">Resilience Status Indicators</div>
-              <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-                <span class="res-status-pill repaired"><i class="fas fa-check-circle"></i> AUTO-REPAIRED (Causal DAG Sorted)</span>
-                <span class="res-status-pill quarantined"><i class="fas fa-ban"></i> QUARANTINED (Payload Isolated)</span>
-                <span class="res-status-pill validated"><i class="fas fa-shield-check"></i> VALIDATED (HL7/FHIR Compliant)</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ROW 3: WHAT-IF MITIGATION SIMULATOR & OPERATIONAL ANALYTICS -->
-      <div class="dashboard-grid-equal">
-        <!-- What-If Mitigation Simulator -->
-        <div class="glass-panel">
-          <div class="card-header">
-            <div>
-              <div class="card-title">
-                <i class="fas fa-sliders" style="color: var(--accent-cyan);"></i>
-                What-If Mitigation Simulator
-              </div>
-              <div class="card-subtitle">Interactive queueing model for capacity rebalancing and hospital cost recovery</div>
-            </div>
-          </div>
-          <div class="card-body">
-            <!-- Slider 1 -->
-            <div class="slider-group">
-              <div class="slider-label-row">
-                <span>Reduce authorization delay</span>
-                <span id="ent-val-auth" class="slider-val-badge">50%</span>
-              </div>
-              <input type="range" id="ent-slider-auth" class="med-slider" min="0" max="100" value="50">
-            </div>
-
-            <!-- Slider 2 -->
-            <div class="slider-group">
-              <div class="slider-label-row">
-                <span>Increase lab capacity</span>
-                <span id="ent-val-lab" class="slider-val-badge">30%</span>
-              </div>
-              <input type="range" id="ent-slider-lab" class="med-slider" min="0" max="100" value="30">
-            </div>
-
-            <!-- Slider 3 -->
-            <div class="slider-group">
-              <div class="slider-label-row">
-                <span>Increase available beds</span>
-                <span id="ent-val-beds" class="slider-val-badge">25%</span>
-              </div>
-              <input type="range" id="ent-slider-beds" class="med-slider" min="0" max="100" value="25">
-            </div>
-
-            <!-- Slider 4 -->
-            <div class="slider-group">
-              <div class="slider-label-row">
-                <span>Reduce imaging queue</span>
-                <span id="ent-val-img" class="slider-val-badge">35%</span>
-              </div>
-              <input type="range" id="ent-slider-img" class="med-slider" min="0" max="100" value="35">
-            </div>
-
-            <!-- Simulation Outputs -->
-            <div class="sim-results-grid">
-              <div class="sim-metric-box">
-                <div class="sim-metric-sub">Current Waiting Time</div>
-                <div id="ent-sim-current" class="sim-metric-val" style="color: #FF5252;">14.6 hrs</div>
-              </div>
-
-              <div class="sim-metric-box">
-                <div class="sim-metric-sub">Projected Waiting Time</div>
-                <div id="ent-sim-projected" class="sim-metric-val" style="color: var(--accent-emerald);">6.2 hrs</div>
-              </div>
-
-              <div class="sim-metric-box">
-                <div class="sim-metric-sub">Recovered Patient Hours</div>
-                <div id="ent-sim-recovered" class="sim-metric-val" style="color: var(--accent-cyan);">10,480 hrs</div>
-              </div>
-
-              <div class="sim-metric-box">
-                <div class="sim-metric-sub">Estimated Cost Recovery</div>
-                <div id="ent-sim-cost" class="sim-metric-val" style="color: var(--accent-amber);">$786,000</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Operational Analytics Summary -->
-        <div class="glass-panel">
-          <div class="card-header">
-            <div>
-              <div class="card-title">
-                <i class="fas fa-chart-line" style="color: var(--accent-emerald);"></i>
-                Operational Analytics Summary
-              </div>
-              <div class="card-subtitle">Audited metrics &amp; clinical SLA compliance standards</div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="stat-analytics-grid">
-              <div class="stat-item-box">
-                <div class="stat-item-label">BCI (Bottleneck Index)</div>
-                <div class="stat-item-val" style="color: #FF5252;">3.98 <span style="font-size: 0.75rem; color: var(--text-muted);">Max</span></div>
-              </div>
-
-              <div class="stat-item-box">
-                <div class="stat-item-label">SLA Compliance</div>
-                <div class="stat-item-val" style="color: var(--accent-amber);">72.6% <span style="font-size: 0.75rem; color: var(--text-muted);">Target: 95%</span></div>
-              </div>
-
-              <div class="stat-item-box">
-                <div class="stat-item-label">P50 Waiting Duration</div>
-                <div class="stat-item-val">12.4 hrs</div>
-              </div>
-
-              <div class="stat-item-box">
-                <div class="stat-item-label">P90 Waiting Duration</div>
-                <div class="stat-item-val" style="color: #FF5252;">46.0 hrs</div>
-              </div>
-
-              <div class="stat-item-box">
-                <div class="stat-item-label">P99 Long-Tail Delay</div>
-                <div class="stat-item-val" style="color: #FF5252;">68.2 hrs</div>
-              </div>
-
-              <div class="stat-item-box">
-                <div class="stat-item-label">Average Dwell Time</div>
-                <div class="stat-item-val">6.8 hrs / stage</div>
-              </div>
-
-              <div class="stat-item-box">
-                <div class="stat-item-label">Patient Waiting Time</div>
-                <div class="stat-item-val" style="color: var(--accent-cyan);">14.6 hrs Mean</div>
-              </div>
-
-              <div class="stat-item-box">
-                <div class="stat-item-label">Annualized Delay Cost</div>
-                <div class="stat-item-val" style="color: var(--accent-amber);">$1,006,100</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ROW 4: PATIENT JOURNEY EXPLORER -->
-      <section class="glass-panel" style="margin-top: 1.5rem;">
-        <div class="card-header">
-          <div>
-            <div class="card-title">
-              <i class="fas fa-users-viewfinder" style="color: var(--accent-cyan);"></i>
-              Patient Journey Explorer
-            </div>
-            <div class="card-subtitle">Anonymized Patient IDs, live journey stages, waiting times, bottleneck alerts, and data repair status</div>
-          </div>
-          <div style="display: flex; gap: 0.75rem; align-items: center;">
-            <input type="text" id="ent-patient-search" placeholder="Search Anonymized ID or Diagnosis..." style="background: rgba(7,11,20,0.6); border: 1px solid var(--surface-glass-border); padding: 0.45rem 0.85rem; border-radius: var(--radius-sm); color: #FFF; font-size: 0.8rem; outline: none; width: 280px;">
-            <span class="sec-pill hipaa"><i class="fas fa-user-shield"></i> Safe-Harbor De-identified</span>
-          </div>
-        </div>
-        <div class="card-body" style="padding: 0;">
-          <div class="data-table-wrap">
-            <table class="ent-table">
-              <thead>
-                <tr>
-                  <th>Anonymized Patient ID</th>
-                  <th>Clinical Specialty / Cohort</th>
-                  <th>Primary Diagnosis</th>
-                  <th>Current Journey Stage</th>
-                  <th>Total Waiting Time</th>
-                  <th>Bottleneck Status</th>
-                  <th>Data Repair Status</th>
-                </tr>
-              </thead>
-              <tbody id="ent-explorer-tbody">
-                <tr>
-                  <td><strong style="color: var(--accent-cyan); font-family: var(--font-mono);">PT-A8920F</strong></td>
-                  <td>Cardiology</td>
-                  <td>Unstable Angina / Post-PCI</td>
-                  <td><span class="badge-sev CRITICAL">Insurance Authorization</span></td>
-                  <td><span style="font-family: var(--font-mono); font-weight: 700; color: #FF5252;">41.2 hrs</span></td>
-                  <td><span class="badge-sev CRITICAL"><i class="fas fa-fire"></i> Stalled (Payer Queue)</span></td>
-                  <td><span class="res-status-pill repaired"><i class="fas fa-check"></i> AUTO-REPAIRED (Causal DAG)</span></td>
-                </tr>
-                <tr>
-                  <td><strong style="color: var(--accent-cyan); font-family: var(--font-mono);">PT-7C149B</strong></td>
-                  <td>Orthopedics</td>
-                  <td>Femoral Neck Fracture</td>
-                  <td><span class="badge-sev CRITICAL">Bed Assignment</span></td>
-                  <td><span style="font-family: var(--font-mono); font-weight: 700; color: #FF5252;">8.5 hrs</span></td>
-                  <td><span class="badge-sev CRITICAL"><i class="fas fa-triangle-exclamation"></i> Bed Sanitization Hold</span></td>
-                  <td><span class="res-status-pill validated"><i class="fas fa-check"></i> VALIDATED</span></td>
-                </tr>
-                <tr>
-                  <td><strong style="color: var(--accent-cyan); font-family: var(--font-mono);">PT-B3041E</strong></td>
-                  <td>Emergency</td>
-                  <td>Severe Sepsis Protocol</td>
-                  <td><span class="badge-sev MODERATE">Diagnostic Test (CT/MRI)</span></td>
-                  <td><span style="font-family: var(--font-mono); font-weight: 700; color: var(--accent-amber);">5.8 hrs</span></td>
-                  <td><span class="badge-sev MODERATE">Scanner Batch Queue</span></td>
-                  <td><span class="res-status-pill repaired"><i class="fas fa-notes-medical"></i> IMPUTED NOTE</span></td>
-                </tr>
-                <tr>
-                  <td><strong style="color: var(--accent-cyan); font-family: var(--font-mono);">PT-9F88A1</strong></td>
-                  <td>Oncology</td>
-                  <td>Neutropenic Fever</td>
-                  <td><span class="badge-sev MODERATE">Discharge Dependency</span></td>
-                  <td><span style="font-family: var(--font-mono); font-weight: 700; color: var(--accent-amber);">4.2 hrs</span></td>
-                  <td><span class="badge-sev MODERATE">Transit &amp; Pharmacy Hold</span></td>
-                  <td><span class="res-status-pill validated"><i class="fas fa-check"></i> VALIDATED</span></td>
-                </tr>
-                <tr>
-                  <td><strong style="color: var(--accent-cyan); font-family: var(--font-mono);">PT-4D219C</strong></td>
-                  <td>General Surgery</td>
-                  <td>Acute Cholecystitis</td>
-                  <td><span class="badge-sev NORMAL">Treatment / Inpatient</span></td>
-                  <td><span style="font-family: var(--font-mono); font-weight: 700; color: var(--accent-emerald);">2.1 hrs</span></td>
-                  <td><span class="badge-sev NORMAL">On Schedule</span></td>
-                  <td><span class="res-status-pill validated"><i class="fas fa-check"></i> VALIDATED</span></td>
-                </tr>
-                <tr>
-                  <td><strong style="color: var(--accent-cyan); font-family: var(--font-mono);">PT-1A90E4</strong></td>
-                  <td>Cardiology</td>
-                  <td>Atrial Fibrillation with RVR</td>
-                  <td><span class="badge-sev CRITICAL">Insurance Authorization</span></td>
-                  <td><span style="font-family: var(--font-mono); font-weight: 700; color: #FF5252;">36.0 hrs</span></td>
-                  <td><span class="badge-sev CRITICAL"><i class="fas fa-fire"></i> Stalled (Payer Queue)</span></td>
-                  <td><span class="res-status-pill repaired"><i class="fas fa-check"></i> AUTO-REPAIRED</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
     </section>
 
-    <!-- ====================================================================
-         TAB 2: PROCESS MINING GRAPH
-         ==================================================================== -->
+    <!-- Tab 2: Interactive Process Mining Graph -->
     <section id="tab-graph" class="tab-content">
       <div class="dashboard-grid-2col">
         <div class="glass-panel" style="padding: 1rem;">
@@ -804,9 +221,7 @@
       </div>
     </section>
 
-    <!-- ====================================================================
-         TAB 3: PATIENT JOURNEY TRACES
-         ==================================================================== -->
+    <!-- Tab 3: Patient Journey Traces -->
     <section id="tab-traces" class="tab-content">
       <div class="dashboard-grid-2col">
         <!-- Patient Directory -->
@@ -871,9 +286,7 @@
       </div>
     </section>
 
-    <!-- ====================================================================
-         TAB 4: ROOT CAUSE AI & SIMULATOR
-         ==================================================================== -->
+    <!-- Tab 4: Root Cause AI & Simulator -->
     <section id="tab-simulator" class="tab-content">
       <div class="dashboard-grid-equal">
         <!-- Root Cause Multivariate Correlation Matrix -->
@@ -887,12 +300,14 @@
               <div class="card-subtitle">Multivariate statistical synthesis of systemic operational delay drivers</div>
             </div>
           </div>
-          <div class="card-body" id="root-cause-cards-container">
-            <!-- Dynamically populated -->
+          <div class="card-body">
+            <div id="root-cause-cards-container" style="display: flex; flex-direction: column; gap: 1rem;">
+              <!-- Dynamically populated -->
+            </div>
           </div>
         </div>
 
-        <!-- Interactive What-If Simulation Engine -->
+        <!-- What-If Counterfactual Simulator -->
         <div class="glass-panel">
           <div class="card-header">
             <div>
@@ -900,182 +315,211 @@
                 <i class="fas fa-sliders" style="color: var(--accent-cyan);"></i>
                 What-If Mitigation Simulator
               </div>
-              <div class="card-subtitle">Counterfactual queueing simulation for wait-time &amp; cost recovery</div>
+              <div class="card-subtitle">Counterfactual queueing simulation for wait-time & cost recovery</div>
             </div>
           </div>
           <div class="card-body">
+            <!-- Slider 1 -->
             <div class="slider-group">
-              <div class="slider-label-row">
+              <div class="slider-header">
                 <span>Payer Prior-Authorization Automation</span>
-                <span id="slider-auth-val" class="slider-val-badge">0%</span>
+                <span id="val-pa" class="slider-val-badge">0%</span>
               </div>
-              <input type="range" id="slider-auth" class="med-slider" min="0" max="100" value="0">
-              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.25rem;">Accelerates pre-auth approval turnaround via automated EHR clinical extraction.</div>
+              <input type="range" id="slider-pa" class="med-slider" min="0" max="80" step="5" value="0">
+              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.2rem;">
+                Accelerates pre-auth approval turnaround via automated EHR clinical extraction.
+              </div>
             </div>
 
+            <!-- Slider 2 -->
             <div class="slider-group">
-              <div class="slider-label-row">
-                <span>Off-Peak Diagnostic &amp; Lab Speedup</span>
-                <span id="slider-lab-val" class="slider-val-badge">0%</span>
+              <div class="slider-header">
+                <span>Off-Peak Diagnostic & Lab Speedup</span>
+                <span id="val-diag" class="slider-val-badge">0%</span>
               </div>
-              <input type="range" id="slider-lab" class="med-slider" min="0" max="100" value="0">
-              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.25rem;">Increases evening MRI/CT technician coverage to eliminate overnight batch queues.</div>
+              <input type="range" id="slider-diag" class="med-slider" min="0" max="60" step="5" value="0">
+              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.2rem;">
+                Increases evening MRI/CT technician coverage to eliminate overnight batch queues.
+              </div>
             </div>
 
+            <!-- Slider 3 -->
             <div class="slider-group">
-              <div class="slider-label-row">
-                <span>Discharge Transit &amp; Bed Turnover Optimization</span>
-                <span id="slider-discharge-val" class="slider-val-badge">0%</span>
+              <div class="slider-header">
+                <span>Discharge Transit & Bed Turnover Optimization</span>
+                <span id="val-dc" class="slider-val-badge">0%</span>
               </div>
-              <input type="range" id="slider-discharge" class="med-slider" min="0" max="100" value="0">
-              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.25rem;">Coordinates non-emergent patient transport and bedside prescription delivery.</div>
+              <input type="range" id="slider-dc" class="med-slider" min="0" max="70" step="5" value="0">
+              <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.2rem;">
+                Coordinates non-emergent patient transport and bedside prescription delivery.
+              </div>
             </div>
 
-            <!-- Simulation Outputs -->
+            <!-- Simulation Results Output -->
             <div class="sim-results-grid">
               <div class="sim-metric-box">
-                <div id="sim-hours-saved" class="sim-metric-val">0 hrs</div>
+                <div id="sim-saved-pt" class="sim-metric-val">0.0 hrs</div>
                 <div class="sim-metric-sub">Hours Saved per Patient</div>
               </div>
-
               <div class="sim-metric-box">
-                <div id="sim-cohort-hours" class="sim-metric-val">0 hrs</div>
+                <div id="sim-bed-hours" class="sim-metric-val">0 hrs</div>
                 <div class="sim-metric-sub">Cohort Bed-Hours Recovered</div>
               </div>
-
               <div class="sim-metric-box">
-                <div id="sim-wait-reduction" class="sim-metric-val">0%</div>
+                <div id="sim-pct" class="sim-metric-val" style="color: var(--accent-cyan);">0%</div>
                 <div class="sim-metric-sub">Wait Time Reduction Rate</div>
               </div>
-
               <div class="sim-metric-box">
-                <div id="sim-cost-recovery" class="sim-metric-val" style="color: var(--accent-amber);">$0</div>
+                <div id="sim-cost" class="sim-metric-val" style="color: var(--accent-amber);">$0</div>
                 <div class="sim-metric-sub">Projected Annual Cost Recovery</div>
               </div>
             </div>
 
-            <div style="margin-top: 1.5rem;" id="sim-stage-breakdowns">
-              <!-- Rendered dynamically -->
+            <!-- Stage Breakdown -->
+            <div style="margin-top: 1.5rem;">
+              <h5 style="font-size: 0.82rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.75rem;">
+                Stage-by-Stage Wait Reduction Breakdown:
+              </h5>
+              <div id="sim-breakdown-body"></div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ====================================================================
-         TAB 5: ADVERSARIAL RESILIENCE SANDBOX
-         ==================================================================== -->
+    <!-- Tab 5: Adversarial Resilience Sandbox -->
     <section id="tab-sandbox" class="tab-content">
-      <div class="dashboard-grid-equal">
+      <div class="dashboard-grid-2col">
+        <!-- Attack / Anomaly Injection Harness -->
         <div class="glass-panel">
           <div class="card-header">
             <div>
               <div class="card-title">
-                <i class="fas fa-biohazard" style="color: var(--accent-amber);"></i>
-                Adversarial Stress Test Injection
+                <i class="fas fa-shield-virus" style="color: var(--accent-crimson);"></i>
+                Adversarial Attack & Noise Injection Harness
               </div>
-              <div class="card-subtitle">Deliberately inject corrupted, out-of-order, or malformed hospital feeds</div>
+              <div class="card-subtitle">Stress-test the resilience engine with real clinical corruptions</div>
             </div>
           </div>
           <div class="card-body">
-            <div style="display: flex; flex-direction: column; gap: 1rem;">
-              <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.85rem 1rem; background: rgba(13,20,36,0.6); border: 1px solid var(--surface-glass-border); border-radius: var(--radius-sm);">
-                <div>
-                  <div style="font-weight: 700; font-size: 0.9rem;">Out-of-Order Timestamp</div>
-                  <div style="font-size: 0.75rem; color: var(--text-muted);">Injects discharge event timestamped 24 hours BEFORE admission event</div>
-                </div>
-                <button class="btn btn-secondary" data-adversarial-scenario="OUT_OF_ORDER"><i class="fas fa-play"></i> Inject</button>
-              </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+              Healthcare feeds frequently emit out-of-order timestamps, duplicate summaries, unparseable strings, or missing triage notes. Click an attack below to verify autonomous resilience:
+            </p>
 
-              <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.85rem 1rem; background: rgba(13,20,36,0.6); border: 1px solid var(--surface-glass-border); border-radius: var(--radius-sm);">
-                <div>
-                  <div style="font-weight: 700; font-size: 0.9rem;">Duplicate Event Spam</div>
-                  <div style="font-size: 0.75rem; color: var(--text-muted);">Sends 3 simultaneous identical clinical lab order events</div>
-                </div>
-                <button class="btn btn-secondary" data-adversarial-scenario="DUPLICATE_EVENTS"><i class="fas fa-play"></i> Inject</button>
-              </div>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <button class="btn btn-secondary" data-adversarial-scenario="OUT_OF_ORDER" style="justify-content: space-between;">
+                <span><i class="fas fa-backward-step" style="color: var(--accent-amber);"></i> <strong>Out-of-Order Timestamp</strong> (Discharge event dated 24h before Admission)</span>
+                <span class="badge-tag" style="background: rgba(255,179,0,0.15); color: var(--accent-amber);">Inject</span>
+              </button>
 
-              <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.85rem 1rem; background: rgba(13,20,36,0.6); border: 1px solid var(--surface-glass-border); border-radius: var(--radius-sm);">
-                <div>
-                  <div style="font-weight: 700; font-size: 0.9rem;">Corrupted Timestamp / Format</div>
-                  <div style="font-size: 0.75rem; color: var(--text-muted);">Sends malformed unparseable date payload to trigger auto-quarantine</div>
-                </div>
-                <button class="btn btn-secondary" data-adversarial-scenario="CORRUPTED_TIMESTAMP"><i class="fas fa-play"></i> Inject</button>
-              </div>
+              <button class="btn btn-secondary" data-adversarial-scenario="DUPLICATE_DISCHARGE" style="justify-content: space-between;">
+                <span><i class="fas fa-copy" style="color: var(--accent-blue);"></i> <strong>Duplicate Discharge Summary</strong> (Identical payload within 45 seconds)</span>
+                <span class="badge-tag" style="background: rgba(41,121,255,0.15); color: var(--accent-blue);">Inject</span>
+              </button>
 
-              <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.85rem 1rem; background: rgba(13,20,36,0.6); border: 1px solid var(--surface-glass-border); border-radius: var(--radius-sm);">
-                <div>
-                  <div style="font-weight: 700; font-size: 0.9rem;">Missing Clinical Notes</div>
-                  <div style="font-size: 0.75rem; color: var(--text-muted);">Ingests triage encounter without operational metadata; triggers imputation</div>
-                </div>
-                <button class="btn btn-secondary" data-adversarial-scenario="MISSING_DATA"><i class="fas fa-play"></i> Inject</button>
+              <button class="btn btn-secondary" data-adversarial-scenario="CORRUPTED_TIMESTAMP" style="justify-content: space-between;">
+                <span><i class="fas fa-bug" style="color: var(--accent-crimson);"></i> <strong>Corrupted Null/Hex Timestamp</strong> (Unparseable garbage string)</span>
+                <span class="badge-tag" style="background: rgba(255,23,68,0.15); color: var(--accent-crimson);">Inject</span>
+              </button>
+
+              <button class="btn btn-secondary" data-adversarial-scenario="MISSING_CLINICAL_NOTE" style="justify-content: space-between;">
+                <span><i class="fas fa-file-circle-question" style="color: var(--accent-cyan);"></i> <strong>Missing Triage Acuity Note</strong> (Missing clinical triage field)</span>
+                <span class="badge-tag" style="background: rgba(0,229,255,0.15); color: var(--accent-cyan);">Inject</span>
+              </button>
+
+              <button class="btn btn-secondary" data-adversarial-scenario="CONFLICTING_SOURCE" style="justify-content: space-between;">
+                <span><i class="fas fa-arrows-split-up-and-left" style="color: var(--accent-purple);"></i> <strong>Conflicting Multi-Source Stream</strong> (Scheduling feed claiming lab result)</span>
+                <span class="badge-tag" style="background: rgba(213,0,249,0.15); color: var(--accent-purple);">Inject</span>
+              </button>
+            </div>
+
+            <!-- Quarantined Records Table -->
+            <div style="margin-top: 2rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <h5 style="font-size: 0.85rem; font-weight: 700; color: var(--text-primary);">
+                  <i class="fas fa-vault"></i> Quarantined Payloads Vault
+                </h5>
+                <button id="btn-refresh-quarantine" class="btn btn-secondary" style="padding: 0.2rem 0.5rem; font-size: 0.72rem;">
+                  <i class="fas fa-sync-alt"></i> Refresh Vault
+                </button>
+              </div>
+              <div class="data-table-container">
+                <table class="med-table">
+                  <thead>
+                    <tr>
+                      <th>Vault ID</th>
+                      <th>Source</th>
+                      <th>Forensic Quarantine Reason</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody id="quarantine-tbody">
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="glass-panel">
-          <div class="card-header">
-            <div>
-              <div class="card-title">
-                <i class="fas fa-terminal" style="color: var(--accent-cyan);"></i>
-                Real-Time Causal DAG Healing Terminal
+        <!-- Live Sandbox Terminal Output -->
+        <div class="glass-panel" style="padding: 0; overflow: hidden;">
+          <div class="terminal-window" style="height: 100%; border: none; border-radius: 0;">
+            <div class="terminal-titlebar">
+              <div class="terminal-dots">
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
               </div>
+              <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">
+                medpulse-resilience-gateway.log
+              </span>
+              <button id="btn-clear-term" class="btn btn-secondary" style="padding: 0.15rem 0.45rem; font-size: 0.68rem;">
+                Clear
+              </button>
             </div>
-            <button id="btn-clear-term" class="btn btn-secondary" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;"><i class="fas fa-eraser"></i> Clear</button>
-          </div>
-          <div class="card-body" style="padding: 0;">
-            <div class="terminal-window" style="border: none; border-radius: 0;">
-              <div class="terminal-titlebar">
-                <div class="terminal-dots">
-                  <div class="terminal-dot red"></div>
-                  <div class="terminal-dot yellow"></div>
-                  <div class="terminal-dot green"></div>
-                </div>
-                <span style="color: var(--text-muted); font-size: 0.7rem;">adversarial_engine.py --stream</span>
-              </div>
-              <div id="sandbox-term-body" class="terminal-body">
-                <div class="term-line info">[INIT] Adversarial Resilience Sandbox Initialized.</div>
-                <div class="term-line success">[READY] Causal DAG Healer, Deduplication Gateway &amp; Quarantine Router listening.</div>
-                <div class="term-line dim">Click 'Inject' above to test self-healing resilience against real-world dirty hospital data.</div>
-              </div>
+            <div id="sandbox-term-body" class="terminal-body" style="height: 600px;">
+              <div class="term-line success">Med-Pulse 360 Adversarial Resilience Engine v1.0.0 Online.</div>
+              <div class="term-line info">Causal DAG validator listening on multi-source clinical streams...</div>
+              <div class="term-line dim">Select an adversarial attack on the left to observe real-time healing.</div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ====================================================================
-         TAB 6: HIPAA SHA-256 AUDIT TRAIL
-         ==================================================================== -->
+    <!-- Tab 6: HIPAA SHA-256 Audit Trail -->
     <section id="tab-audit" class="tab-content">
       <div class="glass-panel">
         <div class="card-header">
           <div>
             <div class="card-title">
-              <i class="fas fa-shield-halved" style="color: var(--accent-emerald);"></i>
-              HIPAA § 164.312(b) Cryptographic Audit Ledger
+              <i class="fas fa-fingerprint" style="color: var(--accent-cyan);"></i>
+              Cryptographic SHA-256 Immutable Audit Ledger
             </div>
-            <div class="card-subtitle">Mathematically unbroken SHA-256 hash-chained block records ensuring complete tamper-evidence</div>
+            <div class="card-subtitle">
+              HIPAA Title II § 164.312(b) compliant tamper-evident hash chaining across every ingestion, auto-healing, and quarantine action
+            </div>
           </div>
-          <span class="sec-pill audit"><i class="fas fa-link"></i> Cryptographic Proof Chain</span>
+          <button class="btn btn-primary" onclick="document.getElementById('btn-verify-audit').click()">
+            <i class="fas fa-check-double"></i> Run Cryptographic Proof Verification
+          </button>
         </div>
-        <div class="card-body" style="padding: 0;">
-          <div class="data-table-wrap" style="max-height: 520px; overflow-y: auto;">
-            <table class="ent-table">
+        <div class="card-body">
+          <div class="data-table-container">
+            <table class="med-table">
               <thead>
                 <tr>
-                  <th>Seq #</th>
-                  <th>Timestamp</th>
-                  <th>Actor / Gateway</th>
+                  <th>Block #</th>
+                  <th>Timestamp (UTC)</th>
                   <th>Action</th>
-                  <th>Previous Block Hash</th>
-                  <th>Current Block Hash</th>
-                  <th>Verification</th>
+                  <th>Actor / Subsystem</th>
+                  <th>Current SHA-256 Hash</th>
+                  <th>Chained Previous Hash</th>
                 </tr>
               </thead>
-              <tbody id="audit-logs-tbody">
-                <tr><td colspan="7" style="text-align: center; color: var(--text-muted);">Loading cryptographically verified audit records...</td></tr>
+              <tbody id="audit-log-tbody">
+                <tr><td colspan="6" style="text-align: center; color: var(--text-muted);">Loading audit trail...</td></tr>
               </tbody>
             </table>
           </div>
@@ -1085,7 +529,7 @@
 
   </main>
 
-  <!-- ES6 Interactive Bootstrap -->
+  <!-- ES6 Application Bootstrap -->
   <script type="module" src="/static/js/app.js"></script>
 </body>
 </html>

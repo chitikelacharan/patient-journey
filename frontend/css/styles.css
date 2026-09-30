@@ -298,7 +298,6 @@ main.app-body {
 .kpi-card.emerald::after { background: var(--accent-emerald); }
 .kpi-card.amber::after { background: var(--accent-amber); }
 .kpi-card.crimson::after { background: var(--accent-crimson); }
-.kpi-card.purple::after { background: var(--accent-purple); }
 
 .kpi-label {
   font-size: 0.8rem;
