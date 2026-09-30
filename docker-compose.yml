@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  medpulse-analyzer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: medpulse_analyzer_prod
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DATABASE_URL=sqlite:///./healthcare_analyzer.db
+      - AUDIT_ENABLED=true
+    volumes:
+      - medpulse_db_data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+volumes:
+  medpulse_db_data:
+    driver: local

@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Patient Journey Bottleneck Analyzer (PNH1) - Enterprise MedAI Healthcare Operations Intelligence System">
+  <title>Patient Journey Bottleneck Analyzer – PNH1 | Healthcare Operations Intelligence</title>
+
+  <!-- Typography: Google Fonts (Outfit & Plus Jakarta Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Core & Component Styles -->
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="stylesheet" href="/static/css/components.css">
+</head>
+<body>
+
+  <!-- Enterprise Header -->
+  <header class="app-header">
+    <div class="brand-section">
+      <div class="brand-badge-icon">
+        <i class="fas fa-heart-pulse"></i>
+      </div>
+      <div class="brand-titles">
+        <h1>PATIENT JOURNEY BOTTLENECK ANALYZER</h1>
+        <div class="subtitle">
+          <span>Healthcare Operations Intelligence | MedAI</span>
+          <span style="opacity: 0.35;">|</span>
+          <span style="color: var(--accent-blue-light);">Statement ID: PNH1</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Security & Compliance Status -->
+    <div class="header-badges">
+      <span class="sec-pill hipaa">
+        <i class="fas fa-lock"></i> HIPAA SECURITY: ACTIVE
+      </span>
+      <span class="sec-pill audit">
+        <i class="fas fa-shield-check"></i> SHA-256 AUDIT LEDGER: VERIFIED
+      </span>
+      <span class="sec-pill pnh">
+        <i class="fas fa-database"></i> ENCRYPTED (AES-256)
+      </span>
+      <button id="btn-verify-audit" class="btn btn-primary" title="Cryptographically verify audit ledger hash proof">
+        <i class="fas fa-fingerprint"></i> Verify Hash Proof
+      </button>
+      <button id="btn-refresh-all" class="btn btn-secondary">
+        <i class="fas fa-sync-alt"></i> Refresh Data
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="app-container">
+
+    <!-- TOP 5 KPI CARDS -->
+    <section class="kpi-row-5">
+      <!-- 1. Total Patients -->
+      <div class="kpi-item c-blue">
+        <div class="kpi-header">
+          <span>Total Patients</span>
+          <i class="fas fa-hospital-user"></i>
+        </div>
+        <div id="kpi-total-patients" class="kpi-number">1,248</div>
+        <div class="kpi-sub">
+          <i class="fas fa-circle-check" style="color: var(--accent-emerald);"></i> 100% Ingested & Normalized
+        </div>
+      </div>
+
+      <!-- 2. Average Patient Waiting Time -->
+      <div class="kpi-item c-amber">
+        <div class="kpi-header">
+          <span>Average Patient Waiting Time</span>
+          <i class="fas fa-hourglass-half"></i>
+        </div>
+        <div id="kpi-avg-waiting" class="kpi-number">14.6 hrs</div>
+        <div class="kpi-sub alert">
+          <i class="fas fa-arrow-trend-up"></i> +8.4h above target SLA
+        </div>
+      </div>
+
+      <!-- 3. Patients With Delays -->
+      <div class="kpi-item c-crimson">
+        <div class="kpi-header">
+          <span>Patients With Delays</span>
+          <i class="fas fa-user-clock"></i>
+        </div>
+        <div id="kpi-patients-delayed" class="kpi-number">342</div>
+        <div class="kpi-sub alert">
+          <i class="fas fa-triangle-exclamation"></i> 27.4% Stalled in System
+        </div>
+      </div>
+
+      <!-- 4. Critical Bottleneck -->
+      <div class="kpi-item c-purple">
+        <div class="kpi-header">
+          <span>Critical Bottleneck</span>
+          <i class="fas fa-fire"></i>
+        </div>
+        <div id="kpi-critical-choke" class="kpi-number" style="font-size: 1.25rem; line-height: 1.3;">Insurance Auth</div>
+        <div class="kpi-sub alert">
+          <i class="fas fa-bolt"></i> BCI: 3.98 (Critical Severity)
+        </div>
+      </div>
+
+      <!-- 5. Mean Length of Stay -->
+      <div class="kpi-item c-emerald">
+        <div class="kpi-header">
+          <span>Mean Length of Stay</span>
+          <i class="fas fa-bed-pulse"></i>
+        </div>
+        <div id="kpi-mean-los" class="kpi-number">64.0 hrs</div>
+        <div class="kpi-sub good">
+          <i class="fas fa-calendar-check"></i> 2.67 Hospital Days Avg
+        </div>
+      </div>
+    </section>
+
+    <!-- PATIENT JOURNEY TIMELINE (8-Stage Complete Flow with Glowing Red Choke Point) -->
+    <section class="journey-pipeline-container">
+      <div class="pipeline-header">
+        <div class="pipeline-title">
+          <i class="fas fa-route" style="color: var(--accent-cyan);"></i>
+          <span>End-to-End Reconstructed Patient Journey Flow</span>
+        </div>
+        <div class="pipeline-badge-choke">
+          <i class="fas fa-circle-exclamation"></i>
+          <span>INSURANCE AUTHORIZATION – CRITICAL BOTTLENECK</span>
+        </div>
+      </div>
+
+      <div class="pipeline-flow">
+        <!-- Stage 1 -->
+        <div class="pipeline-step">
+          <div class="step-number">Stage 01</div>
+          <div class="step-label">Appointment</div>
+          <div class="step-time">15 mins</div>
+          <div class="step-subtext">Online / Walk-in</div>
+        </div>
+
+        <!-- Stage 2 -->
+        <div class="pipeline-step">
+          <div class="step-number">Stage 02</div>
+          <div class="step-label">Doctor Consultation</div>
+          <div class="step-time">25 mins</div>
+          <div class="step-subtext">Triage & Intake</div>
+        </div>
+
+        <!-- Stage 3 -->
+        <div class="pipeline-step">
+          <div class="step-number">Stage 03</div>
+          <div class="step-label">Diagnostic Test</div>
+          <div class="step-time">1.2 hrs</div>
+          <div class="step-subtext">CT / MRI Order</div>
+        </div>
+
+        <!-- Stage 4 -->
+        <div class="pipeline-step">
+          <div class="step-number">Stage 04</div>
+          <div class="step-label">Lab Result</div>
+          <div class="step-time">2.8 hrs</div>
+          <div class="step-subtext">PACS & Pathology</div>
+        </div>
+
+        <!-- Stage 5 -->
+        <div class="pipeline-step">
+          <div class="step-number">Stage 05</div>
+          <div class="step-label">Specialist Referral</div>
+          <div class="step-time">4.1 hrs</div>
+          <div class="step-subtext">Cardio / Ortho</div>
+        </div>
+
+        <!-- Stage 6: CRITICAL BOTTLENECK -->
+        <div class="pipeline-step bottleneck">
+          <div class="step-number" style="color: var(--accent-crimson-bright);">Stage 06 [CHOKE POINT]</div>
+          <div class="step-label">Insurance Authorization</div>
+          <div class="step-time alert">38.5 hrs</div>
+          <div class="step-subtext" style="color: #FF8A80; font-weight: 700;">Target SLA: 4.0h (+862%)</div>
+        </div>
+
+        <!-- Stage 7 -->
+        <div class="pipeline-step">
+          <div class="step-number">Stage 07</div>
+          <div class="step-label">Treatment</div>
+          <div class="step-time">22.0 hrs</div>
+          <div class="step-subtext">Inpatient / Bed Stay</div>
+        </div>
+
+        <!-- Stage 8 -->
+        <div class="pipeline-step">
+          <div class="step-number">Stage 08</div>
+          <div class="step-label">Discharge</div>
+          <div class="step-time">3.5 hrs</div>
+          <div class="step-subtext">Pharmacy & Transit</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROW 1: TOP SYSTEMIC BOTTLENECKS TABLE & REAL-TIME ALERTS -->
+    <div class="grid-2col-65-35">
+      <!-- Bottleneck Analysis Table -->
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">
+              <i class="fas fa-list-check" style="color: var(--accent-crimson-bright);"></i>
+              Top Systemic Bottlenecks
+            </div>
+            <div class="panel-subtitle">Ranked by Bottleneck Criticality Index (BCI), 90th percentile latency, and patient delay volume</div>
+          </div>
+        </div>
+        <div class="panel-content" style="padding: 0;">
+          <div class="data-table-wrap">
+            <table class="ent-table">
+              <thead>
+                <tr>
+                  <th>Transition / Choke Point</th>
+                  <th>Severity</th>
+                  <th>BCI Score</th>
+                  <th>Median Duration</th>
+                  <th>P90 Duration</th>
+                  <th>Target SLA</th>
+                  <th>Patients Impacted</th>
+                  <th>Estimated Cost</th>
+                </tr>
+              </thead>
+              <tbody id="top-bottlenecks-tbody">
+                <!-- Dynamically populated or rendered with realistic clinical data -->
+                <tr>
+                  <td>
+                    <strong>PRIOR AUTH SUBMITTED → PRIOR AUTH DECISION</strong>
+                    <div style="font-size: 0.7rem; color: var(--text-muted);">Payer authorization backlog & manual clinical peer review</div>
+                  </td>
+                  <td><span class="badge-sev CRITICAL">CRITICAL</span></td>
+                  <td><strong style="color: var(--accent-crimson-bright); font-family: var(--font-mono);">3.98</strong></td>
+                  <td><span style="font-family: var(--font-mono);">38.5 hrs</span></td>
+                  <td><span style="font-family: var(--font-mono);">46.0 hrs</span></td>
+                  <td><span style="font-family: var(--font-mono);">4.0 hrs</span></td>
+                  <td><strong>184</strong></td>
+                  <td style="color: var(--accent-crimson-bright); font-family: var(--font-mono); font-weight: 700;">$532,000</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>BED REQUESTED → BED ASSIGNED</strong>
+                    <div style="font-size: 0.7rem; color: var(--text-muted);">Environmental sanitization queue & nursing shift changeover</div>
+                  </td>
+                  <td><span class="badge-sev CRITICAL">CRITICAL</span></td>
+                  <td><strong style="color: var(--accent-crimson-bright); font-family: var(--font-mono);">2.84</strong></td>
+                  <td><span style="font-family: var(--font-mono);">6.2 hrs</span></td>
+                  <td><span style="font-family: var(--font-mono);">9.5 hrs</span></td>
+                  <td><span style="font-family: var(--font-mono);">2.0 hrs</span></td>
+                  <td><strong>96</strong></td>
+                  <td style="color: var(--accent-crimson-bright); font-family: var(--font-mono); font-weight: 700;">$218,500</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>IMAGING ORDER → IMAGING COMPLETE</strong>
+                    <div style="font-size: 0.7rem; color: var(--text-muted);">Evening MRI/CT scanner capacity & tech staffing constraints</div>
+                  </td>
+                  <td><span class="badge-sev MODERATE">MODERATE</span></td>
+                  <td><strong style="color: var(--accent-amber); font-family: var(--font-mono);">2.12</strong></td>
+                  <td><span style="font-family: var(--font-mono);">5.4 hrs</span></td>
+                  <td><span style="font-family: var(--font-mono);">7.8 hrs</span></td>
+                  <td><span style="font-family: var(--font-mono);">3.0 hrs</span></td>
+                  <td><strong>78</strong></td>
+                  <td style="color: var(--accent-amber); font-family: var(--font-mono); font-weight: 700;">$142,000</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>DISCHARGE ORDER → DISCHARGE COMPLETED</strong>
+                    <div style="font-size: 0.7rem; color: var(--text-muted);">Discharge medication reconciliation & patient transit delay</div>
+                  </td>
+                  <td><span class="badge-sev MODERATE">MODERATE</span></td>
+                  <td><strong style="color: var(--accent-amber); font-family: var(--font-mono);">1.85</strong></td>
+                  <td><span style="font-family: var(--font-mono);">3.8 hrs</span></td>
+                  <td><span style="font-family: var(--font-mono);">5.6 hrs</span></td>
+                  <td><span style="font-family: var(--font-mono);">2.0 hrs</span></td>
+                  <td><strong>64</strong></td>
+                  <td style="color: var(--accent-amber); font-family: var(--font-mono); font-weight: 700;">$89,600</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>LAB ORDER → LAB RESULT</strong>
+                    <div style="font-size: 0.7rem; color: var(--text-muted);">Routine chemistry panel batching and pathology backlog</div>
+                  </td>
+                  <td><span class="badge-sev NORMAL">NORMAL</span></td>
+                  <td><strong style="color: var(--accent-emerald); font-family: var(--font-mono);">1.15</strong></td>
+                  <td><span style="font-family: var(--font-mono);">2.8 hrs</span></td>
+                  <td><span style="font-family: var(--font-mono);">3.9 hrs</span></td>
+                  <td><span style="font-family: var(--font-mono);">2.5 hrs</span></td>
+                  <td><strong>42</strong></td>
+                  <td style="color: var(--text-muted); font-family: var(--font-mono); font-weight: 700;">$24,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real-Time Operational Alerts -->
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">
+              <i class="fas fa-bell" style="color: var(--accent-amber);"></i>
+              Real-Time Operational Alerts
+            </div>
+            <div class="panel-subtitle">Immediate systemic delay notices across clinical units</div>
+          </div>
+          <span class="badge-sev CRITICAL" style="animation: pulseCritical 2s infinite;">4 ACTIVE</span>
+        </div>
+        <div class="panel-content">
+          <div class="alerts-stack" id="real-time-alerts-stack">
+            <!-- Alert 1 -->
+            <div class="alert-card critical">
+              <div class="alert-card-icon"><i class="fas fa-circle-exclamation"></i></div>
+              <div class="alert-card-body">
+                <h5>Insurance authorization delay detected</h5>
+                <p>Payer BlueCross response exceeding 36 hrs for 18 cardiology inpatients. Potential stay extension +22.4 hrs.</p>
+              </div>
+            </div>
+
+            <!-- Alert 2 -->
+            <div class="alert-card critical">
+              <div class="alert-card-icon"><i class="fas fa-bed"></i></div>
+              <div class="alert-card-body">
+                <h5>Bed assignment exceeds SLA</h5>
+                <p>14 patients in Emergency Ward awaiting Inpatient Bed Assignment > 5.5 hours. Environmental Services backlog.</p>
+              </div>
+            </div>
+
+            <!-- Alert 3 -->
+            <div class="alert-card moderate">
+              <div class="alert-card-icon"><i class="fas fa-x-ray"></i></div>
+              <div class="alert-card-body">
+                <h5>Imaging completion exceeds SLA</h5>
+                <p>Radiology CT Queue experiencing 4.8 hr turnaround due to evening scanner recalibration and technician shortage.</p>
+              </div>
+            </div>
+
+            <!-- Alert 4 -->
+            <div class="alert-card moderate">
+              <div class="alert-card-icon"><i class="fas fa-truck-medical"></i></div>
+              <div class="alert-card-body">
+                <h5>Discharge dependency detected</h5>
+                <p>8 medically cleared patients stalled awaiting take-home pharmacy reconciliation and non-emergent wheelchair transit.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 2: ROOT CAUSE ANALYSIS & ADVERSARIAL RESILIENCE: ACTIVE -->
+    <div class="grid-2col-equal">
+      <!-- Root Cause Analysis -->
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">
+              <i class="fas fa-brain" style="color: var(--accent-cyan);"></i>
+              Root Cause Analysis
+            </div>
+            <div class="panel-subtitle">Multivariate statistical correlation linking operational drivers to patient delay</div>
+          </div>
+          <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-cyan);">n = 1,248 Traces</span>
+        </div>
+        <div class="panel-content">
+          <div class="root-cause-list">
+            <!-- Cause 1 -->
+            <div class="cause-row">
+              <div class="cause-info">
+                <span class="cause-name"><i class="fas fa-file-invoice-dollar" style="color: var(--accent-crimson-bright);"></i> Payer authorization backlog</span>
+                <span class="cause-pct">88% (r = 0.88, p &lt; 0.001)</span>
+              </div>
+              <div class="cause-bar-track">
+                <div class="cause-bar-fill red" style="width: 88%;"></div>
+              </div>
+            </div>
+
+            <!-- Cause 2 -->
+            <div class="cause-row">
+              <div class="cause-info">
+                <span class="cause-name"><i class="fas fa-flask-vial" style="color: var(--accent-amber);"></i> High diagnostic volume</span>
+                <span class="cause-pct">74% (r = 0.74, p &lt; 0.001)</span>
+              </div>
+              <div class="cause-bar-track">
+                <div class="cause-bar-fill amber" style="width: 74%;"></div>
+              </div>
+            </div>
+
+            <!-- Cause 3 -->
+            <div class="cause-row">
+              <div class="cause-info">
+                <span class="cause-name"><i class="fas fa-tools" style="color: var(--accent-blue-light);"></i> Equipment downtime</span>
+                <span class="cause-pct">68% (r = 0.68, p &lt; 0.01)</span>
+              </div>
+              <div class="cause-bar-track">
+                <div class="cause-bar-fill blue" style="width: 68%;"></div>
+              </div>
+            </div>
+
+            <!-- Cause 4 -->
+            <div class="cause-row">
+              <div class="cause-info">
+                <span class="cause-name"><i class="fas fa-user-nurse" style="color: var(--accent-purple);"></i> Staff shortage</span>
+                <span class="cause-pct">62% (r = 0.62, p &lt; 0.01)</span>
+              </div>
+              <div class="cause-bar-track">
+                <div class="cause-bar-fill purple" style="width: 62%;"></div>
+              </div>
+            </div>
+
+            <!-- Cause 5 -->
+            <div class="cause-row">
+              <div class="cause-info">
+                <span class="cause-name"><i class="fas fa-bed" style="color: var(--accent-emerald);"></i> Bed availability</span>
+                <span class="cause-pct">58% (r = 0.58, p &lt; 0.01)</span>
+              </div>
+              <div class="cause-bar-track">
+                <div class="cause-bar-fill emerald" style="width: 58%;"></div>
+              </div>
+            </div>
+
+            <!-- Cause 6 -->
+            <div class="cause-row">
+              <div class="cause-info">
+                <span class="cause-name"><i class="fas fa-clipboard-check" style="color: var(--text-secondary);"></i> Pending report validation</span>
+                <span class="cause-pct">45% (r = 0.45, p &lt; 0.05)</span>
+              </div>
+              <div class="cause-bar-track">
+                <div class="cause-bar-fill blue" style="width: 45%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Adversarial Resilience: ACTIVE -->
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">
+              <i class="fas fa-shield-halved" style="color: var(--accent-emerald);"></i>
+              Adversarial Resilience: ACTIVE
+            </div>
+            <div class="panel-subtitle">Automated defense against corrupted clinical notes, duplicated summaries & out-of-order streams</div>
+          </div>
+          <span class="sec-pill hipaa"><i class="fas fa-check"></i> 100% HEALED / ISOLATED</span>
+        </div>
+        <div class="panel-content">
+          <div class="resilience-metrics-grid">
+            <div class="resilience-metric-card">
+              <div class="rm-title">
+                <span>Corrupted Records Detected</span>
+                <i class="fas fa-bug" style="color: var(--accent-crimson-bright);"></i>
+              </div>
+              <div class="rm-count" style="color: var(--accent-crimson-bright);">8</div>
+            </div>
+
+            <div class="resilience-metric-card">
+              <div class="rm-title">
+                <span>Duplicate Events Removed</span>
+                <i class="fas fa-copy" style="color: var(--accent-blue-light);"></i>
+              </div>
+              <div class="rm-count" style="color: var(--accent-blue-light);">14</div>
+            </div>
+
+            <div class="resilience-metric-card">
+              <div class="rm-title">
+                <span>Missing Clinical Notes Handled</span>
+                <i class="fas fa-notes-medical" style="color: var(--accent-amber);"></i>
+              </div>
+              <div class="rm-count" style="color: var(--accent-amber);">19</div>
+            </div>
+
+            <div class="resilience-metric-card">
+              <div class="rm-title">
+                <span>Out-of-Order Timestamps Repaired</span>
+                <i class="fas fa-arrow-down-up-across-line" style="color: var(--accent-emerald);"></i>
+              </div>
+              <div class="rm-count" style="color: var(--accent-emerald);">27</div>
+            </div>
+          </div>
+
+          <div style="background: var(--bg-surface-elevated); padding: 0.85rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-card); margin-bottom: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-primary);">
+                <i class="fas fa-vault"></i> Malformed Feeds Quarantined
+              </span>
+              <span style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; color: var(--accent-crimson-bright);">
+                5 Payloads Quarantined
+              </span>
+            </div>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">
+              Payloads with corrupt unparseable hex strings or invalid schemas are safely isolated in the Quarantine Vault without skewing hospital analytics.
+            </div>
+          </div>
+
+          <div class="status-pills-row">
+            <span class="res-status-pill repaired"><i class="fas fa-wrench"></i> AUTO-REPAIRED (Causal DAG)</span>
+            <span class="res-status-pill quarantined"><i class="fas fa-ban"></i> QUARANTINED (Zero Metric Skew)</span>
+            <span class="res-status-pill validated"><i class="fas fa-check-double"></i> VALIDATED (SHA-256 Ledger)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 3: WHAT-IF MITIGATION SIMULATOR & MEASURABLE ANALYTICS -->
+    <div class="grid-2col-60-40">
+      <!-- What-If Mitigation Simulator -->
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">
+              <i class="fas fa-sliders" style="color: var(--accent-cyan);"></i>
+              What-If Mitigation Simulator
+            </div>
+            <div class="panel-subtitle">Discrete-event counterfactual simulation to predict hospital capacity recovery</div>
+          </div>
+        </div>
+        <div class="panel-content">
+          <div class="simulator-layout">
+            <!-- Sliders -->
+            <div class="sim-sliders-col">
+              <!-- Slider 1 -->
+              <div class="sim-slider-row">
+                <div class="sim-slider-label">
+                  <span>Reduce authorization delay</span>
+                  <span id="ent-val-auth" class="sim-slider-val">50%</span>
+                </div>
+                <input type="range" id="ent-slider-auth" class="ent-slider" min="0" max="80" step="5" value="50">
+              </div>
+
+              <!-- Slider 2 -->
+              <div class="sim-slider-row">
+                <div class="sim-slider-label">
+                  <span>Increase lab capacity</span>
+                  <span id="ent-val-lab" class="sim-slider-val">30%</span>
+                </div>
+                <input type="range" id="ent-slider-lab" class="ent-slider" min="0" max="70" step="5" value="30">
+              </div>
+
+              <!-- Slider 3 -->
+              <div class="sim-slider-row">
+                <div class="sim-slider-label">
+                  <span>Increase available beds</span>
+                  <span id="ent-val-beds" class="sim-slider-val">25%</span>
+                </div>
+                <input type="range" id="ent-slider-beds" class="ent-slider" min="0" max="60" step="5" value="25">
+              </div>
+
+              <!-- Slider 4 -->
+              <div class="sim-slider-row">
+                <div class="sim-slider-label">
+                  <span>Reduce imaging queue</span>
+                  <span id="ent-val-img" class="sim-slider-val">35%</span>
+                </div>
+                <input type="range" id="ent-slider-img" class="ent-slider" min="0" max="60" step="5" value="35">
+              </div>
+            </div>
+
+            <!-- Simulator Results -->
+            <div class="sim-display-metrics">
+              <div class="sim-display-box">
+                <div class="sim-display-title">Current Waiting Time</div>
+                <div id="ent-sim-current" class="sim-display-val" style="color: var(--accent-crimson-bright);">14.6 hrs</div>
+              </div>
+
+              <div class="sim-display-box">
+                <div class="sim-display-title">Projected Waiting Time</div>
+                <div id="ent-sim-projected" class="sim-display-val cyan">6.8 hrs</div>
+              </div>
+
+              <div class="sim-display-box">
+                <div class="sim-display-title">Recovered Patient Hours</div>
+                <div id="ent-sim-recovered" class="sim-display-val">9,734 hrs</div>
+              </div>
+
+              <div class="sim-display-box">
+                <div class="sim-display-title">Estimated Cost Recovery</div>
+                <div id="ent-sim-cost" class="sim-display-val amber">$730,050</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advanced Statistical Analytics Summary -->
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">
+              <i class="fas fa-chart-line" style="color: var(--accent-emerald);"></i>
+              Operational Analytics Summary
+            </div>
+            <div class="panel-subtitle">Audited metrics & clinical SLA compliance standards</div>
+          </div>
+        </div>
+        <div class="panel-content">
+          <div class="stat-analytics-grid">
+            <div class="stat-item-box">
+              <div class="stat-item-label">BCI (Bottleneck Index)</div>
+              <div class="stat-item-val" style="color: var(--accent-crimson-bright);">3.98 <span style="font-size: 0.75rem; color: var(--text-muted);">Max</span></div>
+            </div>
+
+            <div class="stat-item-box">
+              <div class="stat-item-label">SLA Compliance</div>
+              <div class="stat-item-val" style="color: var(--accent-amber);">72.6% <span style="font-size: 0.75rem; color: var(--text-muted);">Target: 95%</span></div>
+            </div>
+
+            <div class="stat-item-box">
+              <div class="stat-item-label">P50 Waiting Duration</div>
+              <div class="stat-item-val">12.4 hrs</div>
+            </div>
+
+            <div class="stat-item-box">
+              <div class="stat-item-label">P90 Waiting Duration</div>
+              <div class="stat-item-val" style="color: var(--accent-crimson-bright);">46.0 hrs</div>
+            </div>
+
+            <div class="stat-item-box">
+              <div class="stat-item-label">P99 Long-Tail Delay</div>
+              <div class="stat-item-val" style="color: #FF5252;">68.2 hrs</div>
+            </div>
+
+            <div class="stat-item-box">
+              <div class="stat-item-label">Average Dwell Time</div>
+              <div class="stat-item-val">6.8 hrs / stage</div>
+            </div>
+
+            <div class="stat-item-box">
+              <div class="stat-item-label">Patient Waiting Time</div>
+              <div class="stat-item-val" style="color: var(--accent-cyan);">14.6 hrs Mean</div>
+            </div>
+
+            <div class="stat-item-box">
+              <div class="stat-item-label">Annualized Delay Cost</div>
+              <div class="stat-item-val" style="color: var(--accent-amber);">$1,006,100</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 4 (BOTTOM SECTION): PATIENT JOURNEY EXPLORER -->
+    <section class="panel" style="margin-top: 1.5rem;">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">
+            <i class="fas fa-users-viewfinder" style="color: var(--accent-blue-light);"></i>
+            Patient Journey Explorer
+          </div>
+          <div class="panel-subtitle">Anonymized Patient IDs, live journey stages, waiting times, bottleneck alerts, and data repair status</div>
+        </div>
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+          <input type="text" id="ent-patient-search" placeholder="Search Anonymized ID or Diagnosis..." style="background: var(--bg-surface-elevated); border: 1px solid var(--border-card); padding: 0.45rem 0.85rem; border-radius: var(--radius-sm); color: #FFF; font-size: 0.8rem; outline: none; width: 280px;">
+          <span class="sec-pill hipaa"><i class="fas fa-user-shield"></i> Safe-Harbor De-identified</span>
+        </div>
+      </div>
+      <div class="panel-content" style="padding: 0;">
+        <div class="data-table-wrap">
+          <table class="ent-table">
+            <thead>
+              <tr>
+                <th>Anonymized Patient ID</th>
+                <th>Clinical Specialty / Cohort</th>
+                <th>Primary Diagnosis</th>
+                <th>Current Journey Stage</th>
+                <th>Total Waiting Time</th>
+                <th>Bottleneck Status</th>
+                <th>Data Repair Status</th>
+              </tr>
+            </thead>
+            <tbody id="ent-explorer-tbody">
+              <!-- Dynamically populated or displayed with realistic clinical records -->
+              <tr>
+                <td><strong style="color: var(--accent-cyan); font-family: var(--font-mono);">PT-A8920F</strong></td>
+                <td>Cardiology</td>
+                <td>Unstable Angina / Post-PCI</td>
+                <td><span class="badge-sev CRITICAL">Insurance Authorization</span></td>
+                <td><span style="font-family: var(--font-mono); font-weight: 700; color: var(--accent-crimson-bright);">41.2 hrs</span></td>
+                <td><span class="badge-sev CRITICAL"><i class="fas fa-fire"></i> Stalled (Payer Queue)</span></td>
+                <td><span class="res-status-pill repaired"><i class="fas fa-check"></i> AUTO-REPAIRED (Causal DAG)</span></td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--accent-cyan); font-family: var(--font-mono);">PT-7C149B</strong></td>
+                <td>Orthopedics</td>
+                <td>Femoral Neck Fracture</td>
+                <td><span class="badge-sev CRITICAL">Bed Assignment</span></td>
+                <td><span style="font-family: var(--font-mono); font-weight: 700; color: var(--accent-crimson-bright);">8.5 hrs</span></td>
+                <td><span class="badge-sev CRITICAL"><i class="fas fa-triangle-exclamation"></i> Bed Sanitization Hold</span></td>
+                <td><span class="res-status-pill validated"><i class="fas fa-check"></i> VALIDATED</span></td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--accent-cyan); font-family: var(--font-mono);">PT-B3041E</strong></td>
+                <td>Emergency</td>
+                <td>Severe Sepsis Protocol</td>
+                <td><span class="badge-sev MODERATE">Diagnostic Test (CT/MRI)</span></td>
+                <td><span style="font-family: var(--font-mono); font-weight: 700; color: var(--accent-amber);">5.8 hrs</span></td>
+                <td><span class="badge-sev MODERATE">Scanner Batch Queue</span></td>
+                <td><span class="res-status-pill repaired"><i class="fas fa-notes-medical"></i> IMPUTED NOTE</span></td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--accent-cyan); font-family: var(--font-mono);">PT-9F88A1</strong></td>
+                <td>Oncology</td>
+                <td>Neutropenic Fever</td>
+                <td><span class="badge-sev MODERATE">Discharge Dependency</span></td>
+                <td><span style="font-family: var(--font-mono); font-weight: 700; color: var(--accent-amber);">4.2 hrs</span></td>
+                <td><span class="badge-sev MODERATE">Transit & Pharmacy Hold</span></td>
+                <td><span class="res-status-pill validated"><i class="fas fa-check"></i> VALIDATED</span></td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--accent-cyan); font-family: var(--font-mono);">PT-4D219C</strong></td>
+                <td>General Surgery</td>
+                <td>Acute Cholecystitis</td>
+                <td><span class="badge-sev NORMAL">Treatment / Inpatient</span></td>
+                <td><span style="font-family: var(--font-mono); font-weight: 700; color: var(--accent-emerald);">2.1 hrs</span></td>
+                <td><span class="badge-sev NORMAL">On Schedule</span></td>
+                <td><span class="res-status-pill validated"><i class="fas fa-check"></i> VALIDATED</span></td>
+              </tr>
+              <tr>
+                <td><strong style="color: var(--accent-cyan); font-family: var(--font-mono);">PT-1A90E4</strong></td>
+                <td>Cardiology</td>
+                <td>Atrial Fibrillation with RVR</td>
+                <td><span class="badge-sev CRITICAL">Insurance Authorization</span></td>
+                <td><span style="font-family: var(--font-mono); font-weight: 700; color: var(--accent-crimson-bright);">36.0 hrs</span></td>
+                <td><span class="badge-sev CRITICAL"><i class="fas fa-fire"></i> Stalled (Payer Queue)</span></td>
+                <td><span class="res-status-pill repaired"><i class="fas fa-check"></i> AUTO-REPAIRED</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ES6 Interactive Bootstrap -->
+  <script type="module" src="/static/js/app.js"></script>
+</body>
+</html>
