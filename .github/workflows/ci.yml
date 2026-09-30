@@ -47,13 +47,6 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    - name: Set up Docker Buildx
-      uses: actions/setup-buildx-action@v3
-
     - name: Build Docker Production Image
-      uses: docker/build-push-action@v5
-      with:
-        context: .
-        file: ./Dockerfile
-        push: false
-        tags: medpulse-analyzer:latest
+      run: |
+        docker build -t medpulse-analyzer:latest .

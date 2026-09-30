@@ -7,7 +7,6 @@ WORKDIR /app
 # Install system build dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
-    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
@@ -18,6 +17,11 @@ RUN pip install --no-cache-dir --user -r requirements.txt
 FROM python:3.11-slim AS runner
 
 WORKDIR /app
+
+# Install curl for container health check probes
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy installed Python packages from builder
 COPY --from=builder /root/.local /root/.local
